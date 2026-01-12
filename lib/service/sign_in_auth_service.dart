@@ -1,7 +1,7 @@
 import 'package:booker/model/usermodel.dart';
+import 'package:booker/service/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class SignInAuthService {
   final Dio _dio = Dio();
@@ -9,7 +9,7 @@ class SignInAuthService {
   Future<String> signIn(Usermodel user) async {
     try {
       final response = await _dio.post(
-        "http://10.0.2.2:8000/api/login",
+        "$baseUrl/api/login",
         data: user.toJson(),
       );
 
@@ -19,6 +19,7 @@ class SignInAuthService {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', token);
 
+        print(response.data['message']);
         return response.data['message'] ?? "Login successful";
       } else {
         return "Login failed (code: ${response.statusCode})";
@@ -30,7 +31,7 @@ class SignInAuthService {
       if (status == 403 && data is Map && data['message'] != null) {
         return data['message'];
       } else if (status == 401 && data is Map && data['message'] != null) {
-        return data['message']; 
+        return data['message'];
       } else if (status == 500) {
         return "Server error, please try again later";
       }

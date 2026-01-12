@@ -12,7 +12,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       try {
         String result = await authService.signIn(event.user);
 
-        if (result == "Login successful") {
+        if (result == "User logged in successfully") {
           emit(SignInSuccessState(message: result));
         } else {
           emit(SignInErrorState(error: result));

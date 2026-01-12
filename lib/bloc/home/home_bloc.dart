@@ -16,5 +16,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(HomeError(e.toString()));
       }
     });
+
+    on<FilterApartments>((event, emit) async {
+      emit(HomeLoading());
+      try {
+        final apartments = await service.filterApartments(event.toJson());
+        emit(HomeLoaded(apartments));
+      } catch (e) {
+        emit(HomeError(e.toString()));
+      }
+    });
   }
 }

@@ -1,9 +1,10 @@
 import 'dart:io';
+import 'package:booker/service/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:booker/model/apartment_model.dart';
 
 class ApartmentRepository {
-  final Dio _dio = Dio(BaseOptions(baseUrl: "http://127.0.0.1:8000/api"));
+  final Dio _dio = Dio(BaseOptions(baseUrl: "$baseUrl/api"));
 
   Future<ApartmentModel> submitApartment({
     required String city,
@@ -35,7 +36,6 @@ class ApartmentRepository {
       print("✅ Response: ${response.data}");
 
       return ApartmentModel.fromJson(response.data);
-
     } on DioException catch (e) {
       print("❌ DioException: ${e.message}");
       print("❌ Status: ${e.response?.statusCode}");

@@ -36,12 +36,13 @@ class ApartmentDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 🖼️ Apartment Image
-            CachedNetworkImage(
-              imageUrl: model.apartmentImage,
-              placeholder: (_, __) => Image.asset("assets/placeholder.png"),
-              errorWidget: (_, __, ___) =>
-                  Image.asset("assets/placeholder.png"),
-            ),
+            if (model.apartmentImage != null)
+              CachedNetworkImage(
+                imageUrl: model.apartmentImage!,
+                placeholder: (_, __) => Image.asset("assets/placeholder.png"),
+                errorWidget: (_, __, ___) =>
+                    Image.asset("assets/placeholder.png"),
+              ),
 
             const SizedBox(height: 16),
 

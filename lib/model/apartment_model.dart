@@ -1,14 +1,13 @@
 class ApartmentModel {
   final int id;
-  final String city;
-  final String governorate;
-  final String rentPrice;
-  final String apartmentSpace;
-  final String rooms;
-  final String floor;
-  final String bathrooms;
-  final String apartmentImage;  
-  final String imageUrl;      
+  final String? city;
+  final String? governorate;
+  final int? rentPrice;
+  final int? apartmentSpace;
+  final int? rooms;
+  final int? floor;
+  final int? bathrooms;
+  final String? apartmentImage;
 
   ApartmentModel({
     required this.id,
@@ -20,11 +19,10 @@ class ApartmentModel {
     required this.floor,
     required this.bathrooms,
     required this.apartmentImage,
-    required this.imageUrl,
   });
 
   factory ApartmentModel.fromJson(Map<String, dynamic> json) {
-    final apartment = json['data']['apartment'];
+    final apartment = json;
     return ApartmentModel(
       id: apartment['id'],
       city: apartment['city'],
@@ -34,8 +32,7 @@ class ApartmentModel {
       rooms: apartment['rooms'],
       floor: apartment['floor'],
       bathrooms: apartment['bathrooms'],
-      apartmentImage: apartment['apartment_image'], 
-      imageUrl: json['data']['image_url'],         
+      apartmentImage: apartment['apartment_image'],
     );
   }
 }
